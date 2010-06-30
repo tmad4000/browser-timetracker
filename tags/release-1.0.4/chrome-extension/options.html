@@ -1,0 +1,45 @@
+<html>
+  <head><title>Time Tracker Preferences</title></head>
+  <script type="text/javascript">
+
+    // Saves options to localStorage.
+    function saveOptions() {
+      var idleCheck = document.getElementById("idle_check");
+      if (idleCheck.checked) {
+        localStorage["idleDetection"] = "true";
+      } else {
+        localStorage["idleDetection"] = "false";
+      }
+
+      // Update status.
+      var status = document.getElementById("status");
+      status.innerHTML = "Preferences Saved.";
+      setTimeout(function() {
+        status.innerHTML = "";
+      }, 750);
+    }
+
+    // Restores options from localStorage, if available.
+    function restoreOptions() {
+      var idleCheck = document.getElementById("idle_check");
+      var idleDetection = localStorage["idleDetection"];
+      if (!idleDetection || idleDetection == "false") {
+        idle_check.checked = false;
+      } else {
+        idle_check.checked = true;
+      }
+    }
+
+  </script>
+
+  <body onload="restoreOptions()">
+    <input type="checkbox" id="idle_check"><b>Idle Detection</b>: When enabled, time
+    tracker attempts to detect if you are actively using the browser or not and
+    will pause and resume automatically. If disabled, you must pause and resume
+    the timer yourself.
+    <br/>
+    <button onclick="saveOptions()">Save</button>
+    <div id="status"></div>
+  </body>
+
+  </body>
